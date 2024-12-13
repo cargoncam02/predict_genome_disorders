@@ -1,0 +1,130 @@
+---
+title: "Predicción de enfermedades genéticamente heredables"
+author: "Carlos González Camuñas, Jesús Manuel Muñoz Vázquez"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    smooth_scroll: true
+    number_sections: true
+    theme: "united"
+    highlight:
+    bibliography: ["libraries.bib"]
+    link-citations: true
+    df_print: paged
+---
+
+<body background = "images/fotofondo2.png">
+<font color="black">
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introducción y objetivos  
+
+La predicción de **enfermedades heredables** de padres a hijos cada vez ha ido ganando un mayor peso en la  
+sociedad actual. Son numerosos los **estudios genómicos** que se hacen en la actualidad con el fin de, no solo  
+conocer mejor nuestro genoma, sino también el conocer las posibles enfermedades que nuestros hijos  
+podrían desarrollar.
+
+A pesar de todo, esto sigue sin ser suficiente para ayudar, ya que la población, cada vez mayor, también desa-  
+rrolla una mayor cantidad de trastornos genéticos.
+
+Nosotros vamos a trabajar con tablas de datos que muestran análisis de ??? menores con trastornos genéticos.
+
+Para ello, vamos a plantear una serie de hipótesis (H0):  
+
+-H0:  
+-H1:
+
+
+-H0:  
+-H1:
+
+
+-H0:  
+-H1:
+
+
+# Materiales y métodos 
+El análisis se ha realizado a partir de las tablas de datos descargadas desde el repostorio "tal" en kaggle.  
+Primero visualizaremos los archivos usando el terminal, para después realizar el tratamiento de datos y la  
+resolución de nuestras hipótesis mediante R, y lo redactaremos como un informe utilizando RMarkdown.
+
+Por último, subiremos todos los archivos de nuestro proyecto a un repostorio público en GitHub, para libre  
+acceso al código y sus contenidos.
+
+## Trabajo en el terminal {.tabset .tabset-pills}
+
+Para ello, vamos a empezar descargando los archivos desde [kaggle](https://www.kaggle.com/datasets/aibuzz/predict-the-genetic-disorders-datasetof-genomes/data).
+
+Posteriormente, se extraerán y reubicarán los archivos desde el terminal, con
+la siguiente secuencia:
+
+### Localizamos los archivos
+Nos quedamos con el nombre del documento descargado, archive.zip, y la ruta de la carpeta en la que  
+se ha descargado, y la buscamos en el terminal.
+
+![](images/terminal1.png){width="80%"}
+
+
+### Creación de un nuevo directorio
+Ahora, vamos a crear un nuevo directorio, llamado *gen_disorder_CIPDB*, en el escritorio, en el que guarda-  
+remos todo lo referente a nuestro proyecto:
+
+![](images/terminal2.png)
+
+### Muda de archivos al nuevo directorio
+Ahora movemos el archivo *archive.zip* de la carpeta *Descargas* a la nueva carpeta de nuestro escritorio:  
+
+![](images/terminal3.png){width="80%"}
+
+### Descomprimir archivos
+Como *archive.zip* es un archivo comprimido, lo descomprimimos con el comando unzip. Una vez descom-  
+primidos los archivos, podemos eliminar el zip:  
+
+![](images/terminal4.png){width="80%"}  
+
+### Visualización de archivos
+
+Las dos tablas de datos son muy similares, solo que una se utilizó para entrenar al programa  
+en la predicción de enfermedades en función de los síntomas, y la otra simplemente es  
+una recogida de datos reales.  
+
+![](images/terminal5.png){width="80%"}  
+
+![](images/terminal6.png){width="80%"}  
+
+Al visualizar los datos desde el terminal, y ver la dificultad que supondría seguir con el análisis   
+de los datos desde ahí, se decidió utilizar R para realizar el análisis de datos.  
+
+## Tratamiento de datos en R
+```{r, tablainicio, echo=FALSE}
+knitr::kable(cars, booktabs = TRUE, format = "pipe")
+```
+
+## Elaboración de gráficas con ggplot2
+## Elaboración del informe con R Markdown
+
+# Resultados y conclusiones
+
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Bibliografía  
+
+Manipulación de tablas en RMarkdown:  
+[http://destio.us.es/calvo/Qficheros/ComoCrearTablasRMarkdown_PedroLuque_2019Sep_librodigital.pdf](http://destio.us.es/calvo/Qficheros/ComoCrearTablasRMarkdown_PedroLuque_2019Sep_librodigital.pdf)
+Fondo página HTML:  
+[https://desarrolloweb.com/articulos/1384.php](https://desarrolloweb.com/articulos/1384.php)
+</font>
+</body>
