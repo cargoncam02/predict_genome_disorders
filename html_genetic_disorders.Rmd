@@ -42,7 +42,7 @@ Para ello, vamos a plantear una serie de hipótesis (H0):
  -**H1:** Las enfermedades no suelen ser provocadas por un mismo tipo de trastorno genético.  
 
 + Segunda hipótesis:  
--**H0:** Las madres con mayor edad tienen hijos con mayor número de defectos en el nacimiento.
+-**H0:** Las madres con mayor edad tienen hijos con mayor número de defectos en el nacimiento.  
 -**H1:**Las madres con mayor edad no tienen por qué tener hijos con mayor número de defectos en el nacimiento.
 
 + Tercera hipótesis:  
