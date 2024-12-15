@@ -43,7 +43,8 @@ Para ello, vamos a plantear una serie de hipótesis (H0):
 
 + Segunda hipótesis:  
 -**H0:** Las madres con mayor edad tienen hijos con mayor número de defectos en el nacimiento.  
--**H1:**Las madres con mayor edad no tienen por qué tener hijos con mayor número de defectos en el nacimiento.
+-**H1:**Las madres con mayor edad no tienen por qué tener hijos con mayor número de defectos en  
+el nacimiento.
 
 + Tercera hipótesis:  
 -**H0:**  
@@ -59,7 +60,7 @@ RMarkdown, para lo que haremos uso de los paquetes:
 
 **dplyr** [@R-dplyr]  
 **ggplot2** [@R-ggplot2; @ggplot22016]  
-**knitr** [@R-knitr; @knitr2014; @knitr2015]
+**knitr** [@R-knitr; @knitr2014; @knitr2015]  
 **kableExtra** [@R-kableExtra]
 
 Por último, subiremos todos los archivos de nuestro proyecto a un [repostorio público](https://github.com/cargoncam02/predict_genome_disorders.git) en GitHub, para libre  
@@ -135,16 +136,16 @@ library(kableExtra)
 dataset <- read.csv("train_genetic_disorders.csv", row.names = NULL)
 ```
 
+Ahora, se va a modificar el data_frame para hacerlo más utilizable de cara al análisis de datos:  
 
-
-```{r modif_dataset, echo=FALSE}
+```{r modif_dataset, echo=TRUE, warning=FALSE, message=FALSE}
 #Aqui vamos a modificar nuestro dataset para poder trabajar con él
 mod_data <- dataset %>% 
   select(2:7,11,12,15:17,24:27,29:38,44,45)
 
 ```
 
-Por último: se va a representar una gráfica con todas las variables que
+Por último: se va a representar una tabla con las variables que
 vamos a utilizar, pero vamos a  
 necesitar hacerlo en varias tablas para poder visualizar todas las columnas decentemente:
 
@@ -169,8 +170,9 @@ knitr::kable(head(mod_data %>%
 
 ```{r tabla2, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(8:14)), align="c", format="html") %>% 
+                    select(8:14)), align="c", format="html", col.names = c("Edad (Padre)","Estado","Frecuencia Respiratoria","Pulsaciones por minuto", "Nivel de riesgo","Género","Asfixia postnatal" )) %>% 
   kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), full_width = F, font_size = 12)
+
 
 ```
 
@@ -178,7 +180,7 @@ knitr::kable(head(mod_data %>%
 
 ```{r tabla3, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(15:21)), align="c", format="html") %>% 
+                    select(15:21)), align="c", format="html", col.names = c("Defectos genéticos en Autopsia", "Detalles ácido fólico", "Enfermedades maternas graves","Exposición a la radiación (rayos X)", "Abuso de sustancias", "Concepción asistida", "Anomalías en embarazos previos")) %>% 
   kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), full_width = F, font_size = 12)
 
 ```
@@ -187,13 +189,16 @@ knitr::kable(head(mod_data %>%
 
 ```{r tabla4, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(22:27)), align="c", format="html") %>% 
+                    select(22:27)), align="c", format="html",col.names = c("No. abortos previos", "Defectos de nacimiento", "Conteo glóbulos blancos", "Resultados Test sanguíneo", "Tipo Desorden genético/enfermedad", "Subclase de desorden")) %>% 
   kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), full_width = F, font_size = 12)
+
 
 ```
 
-## Elaboración de gráficas con ggplot2{.tabset .tabset-pills}
-### Primera hipótesis
+## Elaboración de gráficas con ggplot2{.tabset .tabset-pills} 
+
+### Primera hipótesis  
+
 Para demostrar la primera hipótesis, vamos a crear una gráfica con *geom_bar()* que nos muestre la  
 cantidad de afectados por cada tipo de enfermedad, y vamos colorear las barras en función de  
 los desórdenes genéticos que las provocan:
@@ -216,14 +221,54 @@ mod_data %>%
 ```
 
 ### Segunda hipótesis
-```{r cuant-cual, echo=TRUE, message=FALSE, warning=FALSE}
+```{r Grafico_densidad, echo=TRUE, message=FALSE, warning=FALSE}
+mod_data %>% 
+ filter(Birth.defects !="") %>%
+  ggplot(aes(x = Mother.s.age, col = Birth.defects)) +
+  geom_density() +
+  ggtitle("Distribución de defectos de nacimiento según la edad de la madre") +
+  labs(x="Edad de la madre", y="Defectos de nacimiento", caption = "No se han tenido en cuenta los valores nulos de las variables.", fill = "Tipos de desorden genético:") +
+  theme(legend.position= "right", axis.line = element_line(linewidth = 1, colour = "blue"))
+
 
 ```
+
 ### Tercera hipótesis
+
+```{r Grafico3, echo=TRUE, message=FALSE, warning=FALSE}
+mod_data %>% 
+filter(Disorder.Subclass !="") %>%
+  ggplot(aes(x =  White.Blood.cell.count..thousand.per.microliter., 
+             col = Disorder.Subclass)) +
+  geom_density() +
+  ggtitle("Distribución de glóbulos blancos según la enfermedad") +
+  labs(x="Conteo glóbulos blancos", y="Frecuencia", caption = "No se han tenido en cuenta los valores nulos de las variables.", fill="Desórdenes genéticos") +
+  theme(legend.position= "right", axis.line = element_line(linewidth = 1, colour = "green")) +
+  facet_wrap(~Disorder.Subclass)
+```
+
+### Cuarta hipótesis
+
+```{r grafica4, echo=TRUE, message=FALSE, warning=FALSE}
+mod_data %>% 
+  ggplot(aes(x = White.Blood.cell.count..thousand.per.microliter., y = Blood.cell.count..mcL., col = "steelblue")) +
+  geom_jitter(alpha = 0.5 ,width = 0.4, show.legend = FALSE) +
+  geom_smooth(method = "lm", se = TRUE, col = "darkgreen") +
+  ggtitle("Distribución de defectos de nacimiento según la edad de la madre") +
+  labs(x="Conteo de glóbulos blancos", y="Conteo de células sanguíneas", caption = "No se han tenido en cuenta los valores nulos de las variables.") +
+  theme(legend.position= "right", axis.line = element_line(linewidth = 1, colour = "gold"))
+
+```
+
 
 ## Elaboración del informe con R Markdown  
 Para elaborar el informe se ha introducido un encabezado en formato YAML, para poner el título,  
-el nombre de los autores, la fecha y el tipo de salida.  
+el nombre de los autores, la fecha y el tipo de salida.  También se han habilitado las referencias  
+bibliográficas, y un índice de contenidos flotante.
+
+Se han introducido gráficas y tablas mediante bloques de código en R, y se han insertado imágenes  
+y enlaces.  
+Se han puesto la imagen de fondo y el color del texto del informe con etiquetas html.
 
 # Resultados y conclusiones
 
