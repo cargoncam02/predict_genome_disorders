@@ -753,7 +753,7 @@ mod_data %>%
   theme(legend.position= "right", axis.line = element_line(linewidth = 1, colour = "red"))
 ```
 
-![](github_genetic_disorders_files/figure-gfm/disease-1.png)<!-- -->
+![](disease-1.png)<!-- -->
 
 ### 2.3.2 Segunda hipótesis
 
@@ -774,7 +774,7 @@ mod_data %>%
   theme(legend.position= "right", axis.line = element_line(linewidth = 1, colour = "blue"))
 ```
 
-![](github_genetic_disorders_files/figure-gfm/Grafico_densidad-1.png)<!-- -->
+![](Grafico_densidad-1.png)<!-- -->
 
 ### 2.3.3 Tercera hipótesis
 
@@ -797,7 +797,7 @@ filter(Disorder.Subclass !="") %>%
   facet_wrap(~Disorder.Subclass)
 ```
 
-![](github_genetic_disorders_files/figure-gfm/Grafico3-1.png)<!-- -->
+![](Grafico3-1.png)<!-- -->
 
 ## 2.4 Elaboración del informe con R Markdown
 
