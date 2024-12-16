@@ -1,5 +1,5 @@
 # predict_genome_disorders
-¡¡IMPORTANTE!! LEER ANTES DE ACTUAR
+¡¡IMPORTANTE!! LEER ANTES DE ACTUAR  
 Este repositorio contiene todos los archivos necesarios para el funcionamiento correcto del trabajo, escrito en forma de informe utilizando RMarkdown.
 Antes de nada, decir que el documento utilizado para exponer en clase ha sido *html_genetic_disorders.Rmd*, con su respectiva salida en html, pero como  
 en GitHub no carga bien el html con todas las florituras que hemos puesto, he generado otro documento llamado *github_genetic_disorders.Rmd*, que genera un  
