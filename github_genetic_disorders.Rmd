@@ -3,26 +3,20 @@ title: "Predicción de enfermedades genéticamente heredables"
 author: "Carlos González Camuñas, Jesús Manuel Muñoz Vázquez"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  github_document:
     toc: true
-    toc_float: true
-    toc_depth: 4
-    smooth_scroll: true
     number_sections: true
-    theme: "united"
 bibliography: ["libraries.bib"]
 link-citations: true
 ---
 
-<body background = "images/fotofondo2.png">
-<font color="black">
-
-<!--Se ha generado un archivo libraries.bib con corriendo el siguiente código en la consola:
-knitr::write_bib(c(.packages(), 'dplyr', 'ggplot2', 'knitr', 'kableExtra'), 'libraries.bib') -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+<!--Se ha generado un archivo libraries.bib con corriendo el siguiente código en la consola:
+knitr::write_bib(c(.packages(), 'dplyr', 'ggplot2', 'knitr', 'kableExtra'), 'libraries.bib') -->
 
 # Introducción y objetivos  
 
@@ -67,7 +61,7 @@ RMarkdown, para lo que haremos uso de los paquetes:
 Por último, subiremos todos los archivos de nuestro proyecto a un [repostorio público](https://github.com/cargoncam02/predict_genome_disorders.git) en GitHub, para libre  
 acceso al código y sus contenidos.
 
-## Trabajo en el terminal {.tabset .tabset-pills}
+## Trabajo en el terminal
 
 Para ello, vamos a empezar descargando los archivos desde el repositorio de Amit Kumar en [kaggle](https://www.kaggle.com/datasets/aibuzz/predict-the-genetic-disorders-datasetof-genomes/data).
 
@@ -111,7 +105,7 @@ una recogida de datos reales.
 Al visualizar los datos desde el terminal, y ver la dificultad que supondría seguir con el análisis   
 de los datos desde ahí, se decidió utilizar R para realizar el análisis de datos.  
 
-## Tratamiento de datos en R {.tabset .tabset-pills}  
+## Tratamiento de datos en R
 
 Una vez colocados todos los archivos descargados, se crea un nuevo proyecto a partir de la carpeta  
 *gen_disorder_CIPDB*, y se crea un nuevo archivo RMarkdown. Se van a tratar
@@ -153,17 +147,14 @@ necesitar hacerlo en varias tablas para poder visualizar todas las columnas dece
 El bloque de código para cada una sería similar a esto:
 ```{r tablaejemplo, eval=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(15:21)), align="c", format="html") %>% 
-  kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), font_size = 12)
-
+                    select(15:21)), align="c", format="html")
 ```
 
 ### Primera parte
 
 ```{r tabla1, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(1,4:7)), align="c", format="html", col.names = c("Edad (Niño)", "Defecto materno", "Defecto paterno", "Glóbulos rojos (mcL)", "Edad (Madre)")) %>% 
-  kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), font_size = 14)
+                    select(1,4:7)), align="c", format="html", col.names = c("Edad (Niño)", "Defecto materno", "Defecto paterno", "Glóbulos rojos (mcL)", "Edad (Madre)"))
 
 ```
 
@@ -171,9 +162,7 @@ knitr::kable(head(mod_data %>%
 
 ```{r tabla2, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(8:13)), align="c", format="html", col.names = c("Edad (Padre)","Estado","Frecuencia Respiratoria","Pulsaciones por minuto", "Nivel de riesgo","Género" )) %>% 
-  kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), font_size = 14)
-
+                    select(8:13)), align="c", format="html", col.names = c("Edad (Padre)","Estado","Frecuencia Respiratoria","Pulsaciones por minuto", "Nivel de riesgo","Género" ))
 
 ```
 
@@ -181,8 +170,7 @@ knitr::kable(head(mod_data %>%
 
 ```{r tabla3, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(16:19,21)), align="c", format="html", col.names = c( "Detalles ácido fólico", "Enfermedades maternas graves","Exposición a la radiación (rayos X)", "Abuso de sustancias", "Anomalías en embarazos previos")) %>% 
-  kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), font_size = 14)
+                    select(16:19,21)), align="c", format="html", col.names = c( "Detalles ácido fólico", "Enfermedades maternas graves","Exposición a la radiación (rayos X)", "Abuso de sustancias", "Anomalías en embarazos previos"))
 
 ```
 
@@ -190,13 +178,11 @@ knitr::kable(head(mod_data %>%
 
 ```{r tabla4, echo=FALSE}
 knitr::kable(head(mod_data %>% 
-                    select(22:24,26,27)), align="c", format="html",col.names = c("No. abortos previos", "Defectos de nacimiento", "Conteo glóbulos blancos", "Tipo Desorden genético/enfermedad", "Subclase de desorden")) %>% 
-  kable_styling(bootstrap_options =c("bordered", "responsive", "hover"), font_size = 14)
-
+                    select(22:24,26,27)), align="c", format="html",col.names = c("No. abortos previos", "Defectos de nacimiento", "Conteo glóbulos blancos", "Tipo Desorden genético/enfermedad", "Subclase de desorden"))
 
 ```
 
-## Elaboración de gráficas con ggplot2{.tabset .tabset-pills} 
+## Elaboración de gráficas con ggplot2
 
 ### Primera hipótesis  
 
@@ -269,7 +255,7 @@ Se han introducido gráficas y tablas mediante bloques de código en R, y se han
 y enlaces.  
 Se han puesto la imagen de fondo y el color del texto del informe con etiquetas html.
 
-# Resultados y conclusiones{.tabset .tabset-pills}
+# Resultados y conclusiones
 
 ## Primera hipótesis  
 
@@ -327,5 +313,3 @@ Manual de uso de expresiones lógicas:
 Para aprender a hacer tablas más complejas:  
 [https://rpubs.com/JeisonAlarcon/Tables-R](https://rpubs.com/JeisonAlarcon/Tables-R)
 
-</font>
-</body>
